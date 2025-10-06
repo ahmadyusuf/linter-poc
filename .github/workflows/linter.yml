@@ -30,6 +30,7 @@ jobs:
         id: changes
         run: |
           CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '\.py$' || true)
+          echo "changed_files=$CHANGED_FILES"
           echo "changed_files=$CHANGED_FILES" >> $GITHUB_OUTPUT
 
       # Black formatting (info-only)
@@ -52,9 +53,3 @@ jobs:
             python -m json.tool "$file" > /dev/null
           done || true
 
-      - name: JSON lint
-        run: |
-          find . -name "*.json" ! -path "./.github/workflows/*" -print0 |
-          while IFS= read -r -d '' file; do
-            python -m json.tool "$file" > /dev/null
-          done || true
