@@ -1,9 +1,9 @@
 # Intentional linting issues for testing
 
-# import os, sys
+ import os, sys
 
 
-VARIABLE_ONE = 1
+vARIABLE_ONE = 1
 VARIABLE_TWO = 2
 
 
@@ -26,7 +26,5 @@ def add_numbers(a: int, b: int) -> int:
     """Adds two numbers."""
     return a + b
 
-
-# Missing docstring
 def subtract(a, b):
     return a - b
