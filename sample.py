@@ -15,9 +15,8 @@ def test_function(x, y):
 
 UNUSED_VARIABLE = 42
 
-if True:
-    print("This line is fine")
-    print("This line has bad indentation")
+print("This line is fine")
+print("This line has bad indentation")
 
 LONG_LINE = "This is a very long line that will exceed the 88 character \
 limit that Black enforces in default configuration"
