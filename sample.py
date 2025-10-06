@@ -3,14 +3,14 @@
 # import os, sys
 
 
-VARIABLE_ONE= 1
+VARIABLE_ONE = 1
 VARIABLE_TWO = 2
+
 
 def test_function(x, y):
     z = x + y
     print("Sum is", z)
     return z
-
 
 
 UNUSED_VARIABLE = 42
