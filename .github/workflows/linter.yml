@@ -2,9 +2,9 @@ name: Lint & Format
 
 on:
   pull_request:
-    branches: [ "release/*" ]
+    branches: ["release/*"]
   push:
-    branches: [ "feature/*" ]
+    branches: ["feature/*"]
 
 jobs:
   lint:
@@ -43,4 +43,3 @@ jobs:
       - name: JSONLint
         run: |
           find . -name "*.json" -print0 | xargs -0 -n1 jsonlint -c
-
