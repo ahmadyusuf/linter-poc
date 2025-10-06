@@ -42,7 +42,7 @@ jobs:
       - name: Pylint (diff-based)
         if: steps.changes.outputs.changed_files != ''
         run: |
-          echo "${{ steps.changes.outputs.changed_files }}" | xargs pylint -rcfile=.pylintrc
+          echo "${{ steps.changes.outputs.changed_files }}" | xargs pylint --rcfile=.pylintrc
 
 
       - name: JSON lint
