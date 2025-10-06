@@ -3,8 +3,8 @@
 # import os, sys
 
 
-vairableOne = 1
-variable_two = 2
+VARIABLE_ONE= 1
+VARIABLE_TWO = 2
 
 def testFunction(x, y):
     z = x + y
@@ -13,7 +13,7 @@ def testFunction(x, y):
 
 
 
-unused_var = 42
+UNUSED_VARIABLE = 42
 
 if True:
     print("This line is fine")
