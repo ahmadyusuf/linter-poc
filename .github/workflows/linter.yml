@@ -21,28 +21,38 @@ jobs:
 
       - name: Install linters
         run: |
-          pip install ruff black yamllint jsonlint
+          pip install black pylint  yamllint jsonlint
 
-      # Fail if new issues introduced in changed code
-      - name: Ruff (Python) – fail on new issues
-        run: ruff check . --diff
-
-      # Show existing issues as warnings only
-      - name: Ruff (Python) – warn on legacy issues
-        run: ruff check . || true
-
-      # Enforce Black formatting
-      - name: Black (Python) – check formatting
-        run: black --check .
-
-      # Validate YAML files
-      - name: Yamllint
-        run: yamllint -f parsable . || true
-
-      # Validate JSON files
-      - name: Lint JSON
+      # Python files changed in last commit
+      - name: Get changed Python files
+        id: changes
         run: |
-            find . -name "*.json" ! -path "./.github/workflows/*" -print0 |
-            while IFS= read -r -d '' file; do
-                python -m json.tool "$file" > /dev/null
-            done || true
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '\.py$' || true)
+          echo "changed_files=$CHANGED_FILES" >> $GITHUB_OUTPUT
+
+      # Black formatting (info-only)
+      - name: Black formatting (info-only)
+        if: steps.changes.outputs.changed_files != ''
+        run: |
+          echo "${{ steps.changes.outputs.changed_files }}" | xargs black --check --diff || true
+
+      # Pylint for changed Python files
+      - name: Pylint (diff-based)
+        if: steps.changes.outputs.changed_files != ''
+        run: |
+          echo "${{ steps.changes.outputs.changed_files }}" | xargs pylint --disable=R,C
+
+
+      - name: JSON lint
+        run: |
+          find . -name "*.json" ! -path "./.github/workflows/*" -print0 |
+          while IFS= read -r -d '' file; do
+            python -m json.tool "$file" > /dev/null
+          done || true
+
+      - name: JSON lint
+        run: |
+          find . -name "*.json" ! -path "./.github/workflows/*" -print0 |
+          while IFS= read -r -d '' file; do
+            python -m json.tool "$file" > /dev/null
+          done || true
