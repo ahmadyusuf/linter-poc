@@ -50,6 +50,7 @@ jobs:
         run: |
           find . -name "*.json" ! -path "./.github/workflows/*" -print0 |
           while IFS= read -r -d '' file; do
+            echo "Running linter for $file"
             python -m json.tool "$file" > /dev/null
           done || true
 
