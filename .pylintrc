@@ -1,0 +1,17 @@
+[MASTER]
+# List of plugins (if needed)
+load-plugins=
+
+[MESSAGES CONTROL]
+# Disable docstring-related warnings
+disable=C0114,C0115,C0116
+
+[REPORTS]
+# Disable full report, just show messages
+reports=no
+
+
+[FORMAT]
+# Maximum allowed line length
+max-line-length=120
+
