@@ -6,7 +6,7 @@
 VARIABLE_ONE= 1
 VARIABLE_TWO = 2
 
-def testFunction(x, y):
+def test_function(x, y):
     z = x + y
     print("Sum is", z)
     return z
@@ -19,7 +19,7 @@ if True:
     print("This line is fine")
     print("This line has bad indentation")
 
-long_line = "This is a very long line that will exceed the 88 character \
+LONG_LINE = "This is a very long line that will exceed the 88 character \
 limit that Black enforces in default configuration"
 
 
