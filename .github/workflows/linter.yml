@@ -15,11 +15,12 @@ jobs:
         uses: actions/checkout@v4
         with:
             fetch-depth: 0
+            persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       - name: Install linters
         run: |
@@ -37,20 +38,11 @@ jobs:
       - name: Black formatting (info-only)
         if: steps.changes.outputs.changed_files != ''
         run: |
-          echo "${{ steps.changes.outputs.changed_files }}" | xargs black --check --diff || true
+          echo "${{ steps.changes.outputs.changed_files }}" | xargs black --check --diff
 
       # Pylint for changed Python files
       - name: Pylint (diff-based)
         if: steps.changes.outputs.changed_files != ''
         run: |
           echo "${{ steps.changes.outputs.changed_files }}" | xargs pylint --rcfile=.pylintrc
-
-
-      - name: JSON lint
-        run: |
-          find . -name "*.json" ! -path "./.github/workflows/*" -print0 |
-          while IFS= read -r -d '' file; do
-            echo "Running linter for $file"
-            python -m json.tool "$file" > /dev/null
-          done || true
 
