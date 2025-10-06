@@ -41,7 +41,7 @@ jobs:
 
       # Validate JSON files
       - name: Lint JSON
-      run: |
+        run: |
         find . -name "*.json" ! -path "./.github/workflows/*" -print0 | while IFS= read -r -d '' file; do
             python -m json.tool "$file" > /dev/null
         done
