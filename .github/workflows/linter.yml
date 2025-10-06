@@ -23,23 +23,23 @@ jobs:
         run: |
           pip install ruff black yamllint jsonlint
 
-       Fail if new issues introduced in changed code
+      # Fail if new issues introduced in changed code
       - name: Ruff (Python) – fail on new issues
         run: ruff check . --diff
 
-      ? Show existing issues as warnings only
+      # Show existing issues as warnings only
       - name: Ruff (Python) – warn on legacy issues
         run: ruff check . || true
 
-       Enforce Black formatting
+      # Enforce Black formatting
       - name: Black (Python) – check formatting
         run: black --check .
 
-       Validate YAML files
+      # Validate YAML files
       - name: Yamllint
         run: yamllint -f parsable .
 
-       Validate JSON files
+      # Validate JSON files
       - name: JSONLint
         run: |
           find . -name "*.json" -print0 | xargs -0 -n1 jsonlint -c
