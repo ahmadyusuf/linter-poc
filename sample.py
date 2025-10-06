@@ -1,6 +1,6 @@
 # Intentional linting issues for testing
 
- import os, sys
+import os, sys
 
 
 vARIABLE_ONE = 1
