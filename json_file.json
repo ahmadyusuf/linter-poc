@@ -1,0 +1,11 @@
+{
+  "name": "TestProject",
+  "version": "1.0",
+  "dependencies": {
+    "library1": "1.2.3",
+    "library2": "4.5.6"
+  },
+  "description": "This is a sample JSON without errors",
+  "active": true
+}
+
